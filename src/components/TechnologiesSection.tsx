@@ -88,165 +88,48 @@ const technologies: Technology[] = [
 ];
 
 const TechnologiesSection: React.FC = () => {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-    },
-  };
-
   return (
-    <section className="relative py-20 overflow-hidden">
-      {/* Background Effects */}
-      <div className="absolute inset-0 bg-mesh opacity-40"></div>
-      <div className="absolute inset-0 bg-hero-grid bg-[size:30px_30px] opacity-20"></div>
-
-      {/* Animated Background Lines */}
-      {[...Array(3)].map((_, i) => (
-        <motion.div
-          key={`line-${i}`}
-          className="absolute h-[1px] w-full bg-gradient-to-r from-transparent via-hero-blue-500/30 to-transparent"
-          style={{ top: `${30 * i}%` }}
-          animate={{
-            x: ['-100%', '100%'],
-            opacity: [0, 1, 0],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            delay: i * 2,
-            ease: "linear",
-          }}
-        />
-      ))}
-
-      {/* Main Content */}
-      <div className="container mx-auto px-6 relative z-10">
-        {/* Section Header */}
-        <motion.div
-          className="text-left max-w-2xl mb-16"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            <span className="hero-text-gradient">Tech Arsenal</span>
-          </h2>
-          <p className="text-xl text-hero-blue-200">
-            Equipped with cutting-edge technologies and tools to build extraordinary digital experiences
-          </p>
-        </motion.div>
-
-        {/* Tech Grid */}
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-        >
+    <section className="py-12 md:py-20">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="space-y-8"
+      >
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-8">
+          Technologies & Skills
+        </h2>
+        
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {technologies.map((tech, index) => (
             <motion.div
               key={tech.name}
-              className="relative group"
-              variants={itemVariants}
-              whileHover={{ scale: 1.02 }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.3, delay: index * 0.1 }}
+              className="bg-hero-dark-800/50 backdrop-blur-sm rounded-xl p-6 hover:bg-hero-dark-700/50 transition-colors"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-hero-blue-500/20 to-hero-accent-purple/20 rounded-xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              
-              <div className="hero-border relative">
-                <div className="hero-border-content">
-                  {/* Tech Icon */}
-                  <div className="mb-4">
+              <div className="flex items-start space-x-4">
+                <div className={`text-${tech.color} flex-shrink-0`}>
+                  {tech.icon}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <h3 className="text-lg font-semibold mb-1">{tech.name}</h3>
+                  <p className="text-sm text-gray-300 mb-3">{tech.description}</p>
+                  <div className="w-full bg-hero-dark-900 rounded-full h-2">
                     <motion.div
-                      className={`w-16 h-16 rounded-xl bg-${tech.color}/10 flex items-center justify-center
-                                border border-${tech.color}/30`}
-                      whileHover={{
-                        scale: 1.1,
-                        rotate: [0, -10, 10, 0],
-                      }}
-                    >
-                      <span className={`text-${tech.color}`}>{tech.icon}</span>
-                    </motion.div>
+                      className={`bg-${tech.color} h-2 rounded-full`}
+                      initial={{ width: 0 }}
+                      animate={{ width: `${tech.proficiency}%` }}
+                      transition={{ duration: 1, delay: index * 0.1 }}
+                    />
                   </div>
-
-                  {/* Tech Info */}
-                  <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
-                    {tech.name}
-                    <span className={`text-${tech.color} text-sm font-cyber`}>
-                      {tech.category}
-                    </span>
-                  </h3>
-                  
-                  <p className="text-hero-blue-200 text-sm mb-4">
-                    {tech.description}
-                  </p>
-
-                  {/* Proficiency Bar */}
-                  <div className="relative">
-                    <div className="hero-progress-bar">
-                      <motion.div
-                        className="hero-progress-fill"
-                        initial={{ width: 0 }}
-                        animate={{ width: `${tech.proficiency}%` }}
-                        transition={{ duration: 1, delay: index * 0.1 }}
-                      />
-                    </div>
-                    <motion.span
-                      className={`absolute -top-6 text-${tech.color} text-sm font-cyber`}
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ delay: index * 0.1 + 0.5 }}
-                    >
-                      {tech.proficiency}%
-                    </motion.span>
-                  </div>
-
-                  {/* Hover Effect */}
-                  <motion.div
-                    className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100"
-                    initial={false}
-                    animate={{
-                      background: [
-                        `radial-gradient(circle at center, ${tech.color}10 0%, transparent 0%)`,
-                        `radial-gradient(circle at center, ${tech.color}10 100%, transparent 100%)`,
-                      ],
-                    }}
-                    transition={{
-                      duration: 0.3,
-                      ease: "easeOut",
-                    }}
-                  />
                 </div>
               </div>
             </motion.div>
           ))}
-        </motion.div>
-
-        {/* Floating Decorative Elements */}
-        <motion.div
-          className="absolute -bottom-20 -right-20 w-96 h-96 bg-hero-accent-purple/10 rounded-full blur-3xl"
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.5, 0.3],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
-      </div>
+        </div>
+      </motion.div>
     </section>
   );
 };

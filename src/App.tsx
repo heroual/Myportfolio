@@ -56,36 +56,32 @@ function App() {
   };
 
   return (
-    <div className="bg-hero-dark min-h-screen relative">
-      <Particles
-        id="tsparticles"
-        init={particlesInit}
-        options={particlesConfig}
-        className="absolute inset-0"
-      />
-      <AnimatePresence mode="wait">
-        <motion.div className="relative z-10">
-          <SectionTransition>
+    <div className="min-h-screen bg-hero-dark text-white overflow-x-hidden">
+      <Particles options={particlesConfig} init={particlesInit} className="absolute inset-0" />
+      <div className="relative container mx-auto px-4 sm:px-6 lg:px-8">
+        <AnimatePresence mode="wait">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="space-y-16 md:space-y-24 py-8 md:py-16"
+          >
             <HeroSection />
-          </SectionTransition>
-          
-          <SectionTransition>
-            <AboutSection />
-          </SectionTransition>
-          
-          <SectionTransition>
-            <JourneySection />
-          </SectionTransition>
-          
-          <SectionTransition>
-            <ProjectsSection />
-          </SectionTransition>
-          
-          <SectionTransition>
-            <ContactSection />
-          </SectionTransition>
-        </motion.div>
-      </AnimatePresence>
+            <SectionTransition>
+              <AboutSection />
+            </SectionTransition>
+            <SectionTransition>
+              <JourneySection />
+            </SectionTransition>
+            <SectionTransition>
+              <ProjectsSection />
+            </SectionTransition>
+            <SectionTransition>
+              <ContactSection />
+            </SectionTransition>
+          </motion.div>
+        </AnimatePresence>
+      </div>
     </div>
   );
 }

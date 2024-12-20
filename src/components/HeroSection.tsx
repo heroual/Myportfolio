@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { CodeBracketIcon, RocketLaunchIcon, EnvelopeIcon, PhoneIcon, MapPinIcon } from '@heroicons/react/24/outline';
+import { EnvelopeIcon, PhoneIcon, MapPinIcon } from '@heroicons/react/24/outline';
 import SuperheroAvatar from './SuperheroAvatar.tsx';
 
 const HeroSection: React.FC = () => {

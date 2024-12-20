@@ -1,0 +1,243 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-hero-dark text-white font-hero antialiased;
+    background-image: radial-gradient(circle at center, rgba(0, 189, 255, 0.1) 0%, transparent 70%),
+      linear-gradient(rgba(0, 189, 255, 0.05) 2px, transparent 2px),
+      linear-gradient(90deg, rgba(0, 189, 255, 0.05) 2px, transparent 2px);
+    background-size: 100% 100%, 30px 30px, 30px 30px;
+    background-position: 0 0;
+  }
+}
+
+@layer components {
+  .hero-button {
+    @apply relative px-8 py-3 font-hero font-bold text-white bg-gradient-to-r from-hero-blue-500 to-hero-accent-purple 
+           rounded-lg shadow-hero-button transition-glow duration-300 hover:shadow-hero-hover 
+           hover:scale-102 overflow-hidden;
+  }
+
+  .hero-button::before {
+    @apply content-[''] absolute inset-0 bg-gradient-to-r from-hero-accent-purple to-hero-blue-500 opacity-0 
+           transition-opacity duration-300;
+  }
+
+  .hero-button:hover::before {
+    @apply opacity-100;
+  }
+
+  .hero-card {
+    @apply bg-hero-dark-lighter backdrop-blur-hero border border-hero-blue-500/30 rounded-xl p-6 
+           shadow-hero-card transition-glow duration-300 hover:shadow-hero-hover;
+  }
+
+  .hero-border {
+    @apply relative rounded-xl p-[1px] bg-gradient-to-r from-hero-blue-500 to-hero-accent-purple 
+           animate-border-flow overflow-hidden;
+  }
+
+  .hero-border-content {
+    @apply relative bg-hero-dark-lighter rounded-xl p-6;
+  }
+
+  .hero-text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-hero-blue-400 to-hero-accent-purple 
+           animate-text-shimmer;
+    background-size: 200% auto;
+  }
+
+  .hero-icon {
+    @apply text-hero-blue-500 animate-pulse-glow transition-colors duration-300 
+           hover:text-hero-accent-purple;
+  }
+
+  .hero-skill-badge {
+    @apply relative flex items-center gap-2 px-4 py-2 rounded-lg bg-hero-dark-lighter border border-hero-blue-500/30 
+           shadow-hero transition-glow duration-300 hover:shadow-hero-hover hover:scale-102;
+  }
+
+  .hero-progress-bar {
+    @apply h-2 rounded-full bg-hero-dark-lighter overflow-hidden;
+  }
+
+  .hero-progress-fill {
+    @apply h-full bg-gradient-to-r from-hero-blue-500 to-hero-accent-purple animate-power-pulse;
+  }
+
+  .tech-card {
+    @apply relative bg-hero-dark-lighter backdrop-blur-hero border border-hero-blue-500/30 rounded-xl p-6 
+           transition-all duration-300 hover:border-hero-blue-500/50 hover:shadow-hero-hover;
+  }
+
+  .tech-icon-container {
+    @apply relative w-16 h-16 rounded-xl flex items-center justify-center 
+           transition-transform duration-300 transform hover:scale-110;
+  }
+
+  .tech-icon-glow {
+    @apply absolute inset-0 rounded-xl blur-lg opacity-0 transition-opacity duration-300 
+           group-hover:opacity-50;
+  }
+
+  .tech-proficiency-bar {
+    @apply h-1.5 bg-hero-dark rounded-full overflow-hidden relative;
+  }
+
+  .tech-proficiency-fill {
+    @apply h-full bg-gradient-to-r from-hero-blue-500 to-hero-accent-purple 
+           relative after:absolute after:inset-0 after:bg-shimmer after:animate-shimmer;
+  }
+}
+
+@layer utilities {
+  .text-glow {
+    @apply drop-shadow-hero-text;
+  }
+
+  .bg-mesh {
+    background-image: radial-gradient(at 50% 50%, rgba(0, 189, 255, 0.15) 0px, transparent 50%),
+                      radial-gradient(at 90% 10%, rgba(184, 41, 255, 0.15) 0px, transparent 50%);
+  }
+
+  .mask-hexagon {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 0L93.3013 25V75L50 100L6.69873 75V25L50 0Z' fill='black'/%3E%3C/svg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 0L93.3013 25V75L50 100L6.69873 75V25L50 0Z' fill='black'/%3E%3C/svg%3E");
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+  }
+
+  .animate-shimmer {
+    animation: shimmer 2s linear infinite;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.2) 50%,
+      transparent 100%
+    );
+    background-size: 200% 100%;
+  }
+
+  @keyframes shimmer {
+    from {
+      background-position: 200% 0;
+    }
+    to {
+      background-position: -200% 0;
+    }
+  }
+
+  .scale-102 {
+    --tw-scale-x: 1.02;
+    --tw-scale-y: 1.02;
+    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate))
+              skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x))
+              scaleY(var(--tw-scale-y));
+  }
+
+  .hero-transition {
+    @apply relative overflow-hidden;
+  }
+
+  .hero-transition::before {
+    @apply content-[''] absolute inset-0 bg-gradient-to-r from-hero-blue-500/20 to-hero-accent-purple/20
+           transform scale-x-0 origin-left transition-transform duration-700;
+  }
+
+  .hero-transition:hover::before {
+    @apply scale-x-100;
+  }
+
+  @keyframes power-pulse {
+    0%, 100% {
+      transform: scale(1);
+      opacity: 0.5;
+    }
+    50% {
+      transform: scale(1.1);
+      opacity: 0.8;
+    }
+  }
+
+  @keyframes energy-wave {
+    0% {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+  }
+
+  @keyframes hero-float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+
+  .animate-power-pulse {
+    animation: power-pulse 2s infinite;
+  }
+
+  .animate-energy-wave {
+    animation: energy-wave 3s infinite;
+  }
+
+  .animate-hero-float {
+    animation: hero-float 6s infinite ease-in-out;
+  }
+
+  .transition-glow {
+    transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+  }
+
+  .shadow-hero {
+    box-shadow: 0 0 20px rgba(0, 189, 255, 0.1);
+  }
+
+  .shadow-hero-hover {
+    box-shadow: 0 0 30px rgba(0, 189, 255, 0.2),
+                0 0 60px rgba(184, 41, 255, 0.1);
+  }
+
+  .shadow-glow {
+    box-shadow: 0 0 20px theme('colors.hero-blue.500' / 20%),
+                0 0 40px theme('colors.hero-blue.500' / 10%);
+  }
+
+  .bg-hero-dark-800 {
+    background-color: rgba(13, 17, 23, 0.8);
+  }
+
+  .journey-card-hover {
+    transition: all 0.3s ease-in-out;
+  }
+
+  .journey-card-hover:hover {
+    transform: translateY(-5px);
+  }
+
+  .skill-badge {
+    background: linear-gradient(
+      45deg,
+      theme('colors.hero-blue.500' / 10%) 0%,
+      theme('colors.hero-accent-purple' / 10%) 100%
+    );
+  }
+}
